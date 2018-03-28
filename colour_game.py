@@ -1,111 +1,112 @@
-#Type the colour and not the word
-#from usingpython.com
-
-#import the modules needed to create a GUI
 import Tkinter
-# modules for creating random numbers
 import random
 
-#the list of possible colour.
-colours = ['Red','Blue','Green','Pink','Black','Yellow','Orange','White','Purple','Brown']
-#the player's score, initially 0.
-score=0
-#the game time left, initially 30 seconds.
-timeleft=30
+# The list of possible colours in the game
+possible_colours = ['Red','Blue','Green','Pink','Black','Yellow','Orange','Purple','White', 'Brown']
 
-#a function that will start the game.
+# The player's score
+player_score=0
+
+# The time left of the game
+time_left=30
+
+# Function that starts the game.
 def startGame(event):
 
-    #if there's still time left...
-    if timeleft == 30:
-        #start the countdown timer.
+    # If at the beginning of the game, start the countdown
+    if time_left == 30:
         countdown()
         
-    #run the function to choose the next colour.
+    # Get the next colour from the list of possible colours
     nextColour()
 
-#function to choose and display the next colour.
+# Function that chooses and displays the next colour.
 def nextColour():
 
-    #use the globally declared 'score' and 'play' variables above.
-    global score
-    global timeleft
+    # Use the globally declared 'player_score' and 'time_left' variables
+    global player_score
+    global time_left
 
-    #if a game is currently in play...
-    if timeleft > 0:
+    # If there is still time left in the game make the input box active
+    if time_left > 0:
+        input_box.focus_set()
 
-        #...make the text entry box active.
-        e.focus_set()
+        # If the colour typed is equal to the colour of the text, increase the player's score
+        if input_box.get().lower() == possible_colours[1].lower():
+            player_score += 1
 
-        #if the colour typed is equal to the colour of the text...
-        if e.get().lower() == colours[1].lower():
-            #...add one to the score.
-            score += 1
+        # Clear the input box.
+        input_box.delete(0, Tkinter.END)
 
-        #clear the text entry box.
-        e.delete(0, Tkinter.END)
-        #shuffle the list of colours.
-        random.shuffle(colours)
-        #change the colour to type, by changing the text _and_ the colour to a random colour value
-        label.config(fg=str(colours[1]), text=str(colours[0]))
-        #update the score.
-        scoreLabel.config(text="Score: " + str(score))
+        # Shuffle the list of colours.
+        random.shuffle(possible_colours)
 
-#a countdown timer function. 
+        # Change the colour to type, by changing the text and the colour of the text to a random colour value
+        label.config(fg=str(possible_colours[1]), text=str(possible_colours[0]))
+        
+        # Update the player's score
+        scoreLabel.config(text="Score: " + str(player_score))
+
+# Countdown timer function. 
 def countdown():
 
-    #use the globally declared 'play' variable above.
-    global timeleft
+    # Use the globally declared 'time_left' variable
+    global time_left
 
-    #if a game is in play...
-    if timeleft > 0:
-
-        #decrement the timer.
-        timeleft -= 1
-        #update the time left label.
-        timeLabel.config(text="Time left: " + str(timeleft))
-        #run the function again after 1 second.
-        timeLabel.after(1000, countdown)
+    # If there is still time left in the game
+    if time_left > 0:
+        time_left -= 1 # decrement the timer
+        timeLabel.config(text="Time left: " + str(time_left)) # update the time left label
+        timeLabel.after(1000, countdown) # run the function again after 1 second
     
-#create a GUI window.
+# Create GUI window
 root = Tkinter.Tk()
 
-#set the background
-root.configure(background='yellow')
+# Set the background of the window
+root.configure(background='lightblue')
 
-#set the title.
-root.title("Simple colour game")
-#set the size.
-root.geometry("500x300")
+# Set the title of the window
+root.title("Colour game")
 
-#add an instructions label.
-instructions = Tkinter.Label(root, text="Type in the colour of the words, and not the word text!", font=('Calibri 16 bold'))
+# Set the window size.
+root.geometry("800x500")
+
+# Add an instructions label, describing what to do
+game_title = Tkinter.Label(root, text=" The awesome colour game", fg="darkblue", font=('Arial 46 bold'))
+game_title.pack()
+game_title.configure(background='lightblue')
+
+# Add an instructions label, describing what to do
+instructions = Tkinter.Label(root, text="Type in the colour of the words, and not the word text!", font=('Calibri 24'))
 instructions.pack()
-instructions.configure(background='yellow') # set the background
+instructions.configure(background='lightblue') 
 
-#add a score label.
-scoreLabel = Tkinter.Label(root, text="Press enter to start", font=('Calibri 16 bold'))
+# Add a score label for the player's score
+scoreLabel = Tkinter.Label(root, text="Press enter to start", font=('Calibri 24 bold'))
 scoreLabel.pack()
-scoreLabel.configure(background='yellow') #set the background
+scoreLabel.configure(background='lightblue')
 
-#add a time left label.
-timeLabel = Tkinter.Label(root, text="Time left: " + str(timeleft), font=('Calibri 16 bold'))
+# Add a label displaying the time left 
+timeLabel = Tkinter.Label(root, text="Time left: " + str(time_left), fg="red", font=('Calibri 20 bold'))
 timeLabel.pack()
-timeLabel.configure(background='yellow') # set background
+timeLabel.configure(background='lightblue') 
 
-#add a label for displaying the colours.
+# Add a label that displays the colours.
 label = Tkinter.Label(root, font=('Arial 60 bold'))
 label.pack()
+label.configure(background='lightblue')
 
-#add a text entry box for typing in colours.
-e = Tkinter.Entry(root)
-#run the 'startGame' function when the enter key is pressed.
+# Add a text input box for typing in colours.
+input_box = Tkinter.Entry(root)
+
+# Call the 'startGame' function when the enter key is pressed.
 root.bind('<Return>', startGame)
-e.pack()
-#set focus on the entry box.
-e.focus_set()
+input_box.pack()
 
-#start the GUI
+# Set focus on the input box.
+input_box.focus_set()
+
+# Start the GUI
 root.mainloop()
 
 
