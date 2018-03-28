@@ -2,8 +2,8 @@
 import Tkinter as tk
 import random
 
-# The list of possible colours in the game
-possible_colours = ['Red','Blue','Green','Pink','Black','Yellow','Orange','Purple','White', 'Brown']
+# The list of possible colors in the game
+possible_colors = ['Red','Blue','Green','Pink','Black','Yellow','Orange','Purple','White', 'Brown']
 
 # The player's score
 player_score=0
@@ -19,10 +19,10 @@ def startGame(event):
         countdown()
         
     # Get the next colour from the list of possible colours
-    nextColour()
+    nextColor()
 
 # Function that chooses and displays the next colour.
-def nextColour():
+def nextColor():
 
     # Use the globally declared 'player_score' and 'time_left' variables
     global player_score
@@ -33,17 +33,17 @@ def nextColour():
         input_box.focus_set() # make the input box active
 
         # If the colour typed is equal to the colour of the text
-        if input_box.get().lower() == possible_colours[1].lower():
+        if input_box.get().lower() == possible_colors[1].lower():
             player_score += 1 # increase the player's score
 
         # Clear the input box.
         input_box.delete(0, tk.END)
 
         # Shuffle the list of colours.
-        random.shuffle(possible_colours)
+        random.shuffle(possible_colors)
 
         # Change the colour to type, by changing the text and the colour of the text to a random colour value
-        colourLabel.config(fg=str(possible_colours[1]), text=str(possible_colours[0]))
+        colorLabel.config(fg=str(possible_colors[1]), text=str(possible_colors[0]))
         
         # Update the player's score
         scoreLabel.config(text="Score: " + str(player_score))
@@ -65,21 +65,21 @@ def countdown():
         timeLabel.config(text="Game over! ", font=('Verdana 38 bold')) 
         scoreLabel.config(text="Your score: " + str(player_score), font=('Verdana 30 bold'))
         input_box.pack_forget() # remove input box
-        colourLabel.pack_forget() #remove colourLabel
+        colorLabel.pack_forget() #remove colourLabel
         
 # Create GUI window
 root = tk.Tk()
 root.configure(background='lightblue') # set the background of the window
-root.title("Colour game") # set the title of the window
+root.title("Color game") # set the title of the window
 root.geometry("800x500") # set the window size.
 
 # Add a game title
-game_title = tk.Label(root, text=" The awesome colour game", fg="darkblue", font=('Verdana 46 bold'))
+game_title = tk.Label(root, text=" The awesome color game", fg="darkblue", font=('Verdana 46 bold'))
 game_title.pack()
 game_title.configure(background='lightblue')
 
 # Add an instructions label, describing what to do
-instructionLabel = tk.Label(root, text="Type in the colour of the words, and not the word text!", font=('Verdana 20'))
+instructionLabel = tk.Label(root, text="Type in the color of the words, and not the word text!", font=('Verdana 20'))
 instructionLabel.pack()
 instructionLabel.configure(background='lightblue') 
 
@@ -94,9 +94,9 @@ timeLabel.pack()
 timeLabel.configure(background='lightblue') 
 
 # Add a label that displays the colours
-colourLabel = tk.Label(root, font=('Verdana 60 bold'))
-colourLabel.pack()
-colourLabel.configure(background='lightblue')
+colorLabel = tk.Label(root, font=('Verdana 60 bold'))
+colorLabel.pack()
+colorLabel.configure(background='lightblue')
 
 # Add a text input box for typing in colours
 entryVar = tk.StringVar(value='')
