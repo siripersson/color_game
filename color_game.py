@@ -45,45 +45,44 @@ def countdown():
         colorLabel.pack_forget() #remove colourLabel
         
 # Create GUI window
-root = tk.Tk()
-root.configure(background='lightblue') # set the background of the window
-root.title("Color game")
-root.geometry("800x500") 
+gui = tk.Tk()
+gui.configure(background='lightblue') # set the background of the window
+gui.title("Color game")
+gui.geometry("800x500") 
 
 # Add a game title
-game_title = tk.Label(root, text=" The awesome color game", fg="darkblue", font=('Verdana 46 bold'))
+game_title = tk.Label(gui, text="Color game", fg="darkblue", font=('Verdana 46 bold'))
 game_title.pack()
 game_title.configure(background='lightblue')
 
 # Add an instructions label, describing what to do
-instructionLabel = tk.Label(root, text="Type in the color of the words, and not the word text!", font=('Verdana 20'))
+instructionLabel = tk.Label(gui, text="Type in the color of the words, and not the word text!", font=('Verdana 20'))
 instructionLabel.pack()
 instructionLabel.configure(background='lightblue') 
 
 # Add a score label for the player's score
-scoreLabel = tk.Label(root, text="Press enter to start", font=('Verdana 20 bold'))
+scoreLabel = tk.Label(gui, text="Press enter to start", font=('Verdana 20 bold'))
 scoreLabel.pack()
 scoreLabel.configure(background='lightblue')
 
 # Add a label displaying the time left 
-timeLabel = tk.Label(root, text="Time left: " + str(time_left), fg="red", font=('Verdana 16 bold'))
+timeLabel = tk.Label(gui, text="Time left: " + str(time_left), fg="red", font=('Verdana 16 bold'))
 timeLabel.pack()
 timeLabel.configure(background='lightblue') 
 
 # Add a label that displays the colours
-colorLabel = tk.Label(root, font=('Verdana 60 bold'))
+colorLabel = tk.Label(gui, font=('Verdana 60 bold'))
 colorLabel.pack()
 colorLabel.configure(background='lightblue')
 
 # Add a text input box for typing in colours
-entryVar = tk.StringVar(value='')
-input_box = tk.Entry(root,textvariable=entryVar,font='Calibri 30')
+input_box = tk.Entry(gui, textvariable=tk.StringVar(value=''), font='Calibri 30')
 input_box.pack()
 
 # Call the 'startGame' function when the enter key is pressed
-root.bind('<Return>', startGame)
+gui.bind('<Return>', startGame)
 input_box.focus_set() 
-root.mainloop() # start the GUI
+gui.mainloop() # start the GUI
 
 
 
